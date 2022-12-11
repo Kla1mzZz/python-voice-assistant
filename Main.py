@@ -22,7 +22,7 @@ from rich import print
 console = Console(width=35)
 style = 'bold white on blue'
 
-
+# Name of all commands
 commands = ['текущее время', 'сколько сейчас времени', 'который час',
             'открой браузер', 'открой диск C', 'сколько сейчас времени',
             'открой spotify', 'запусти youtube', 'открой ютуб', 'запусти браузер',
@@ -37,7 +37,7 @@ num_task = 0
 r.pause_treshold = 0.5
 
 
-def talk(speech):
+def talk(speech):  # Voice output
     print(speech)
     engine.say(speech)
     engine.runAndWait()
@@ -54,7 +54,7 @@ def fuzzy_recognizer(rec):
     return str(ans)
 
 
-def listen():
+def listen():  # Text recognising
     global text
     text = ''
     with sr.Microphone() as mic:
@@ -90,17 +90,17 @@ def cmd_init():
     engine.stop()
 
 
-def time():
+def time():  # Says the time
     now = datetime.datetime.now()
     talk("Сейчас " + str(now.hour) + ":" + str(now.minute))
 
 
-def open_browser():
+def open_browser():  # Opens the browser
     webbrowser.open('https://www.google.com')
     talk("Браузер открыт")
 
 
-def help():
+def help():  # Output all commands
     print(commands)
 
 
@@ -120,7 +120,7 @@ def open_c():
     talk('Диск ц открыт')
 
 
-def shut():  # Выключает ПК
+def shut():  # Turns off PC
     system('shutdown /s /f /t 10')
     quite()
 
@@ -130,7 +130,7 @@ def hello():
     talk(k)
 
 
-def quite():
+def quite():  # Exit from voice assistent
     x = ['Надеюсь мы скоро увидимся',
          'Рада была помочь', 'Досвидания', 'До встречи']
     talk(random.choice(x))
@@ -142,7 +142,10 @@ def quite():
 print(Fore.YELLOW + '', end='')
 system('cls')
 
+
+# run all commands
 cmds = {
+    # 'command': function name
     'текущее время': time, 'сколько сейчас времени': time, 'который час': time, 'открой диск C': open_c, 'открой spotify': open_spotify,
     'выключи ПК': shut, 'запусти youtube': open_youtube, 'открой youtube': open_youtube,
     'открой браузер': open_browser, 'команды': help, 'запусти браузер': open_browser, 'сколько сейчас времени': time,
